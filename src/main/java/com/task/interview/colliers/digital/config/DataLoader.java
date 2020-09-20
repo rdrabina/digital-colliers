@@ -1,6 +1,6 @@
 package com.task.interview.colliers.digital.config;
 
-import com.task.interview.colliers.digital.command.datainit.DocumentInitCommand;
+import com.task.interview.colliers.digital.command.datainit.InitDocumentCommand;
 import com.task.interview.colliers.digital.command.datainit.factory.DocumentInitFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -19,7 +19,7 @@ public class DataLoader implements ApplicationRunner {
 
     private final DocumentInitFactory documentInitFactory;
 
-    private final Map<Integer, DocumentInitCommand> documentInitCommandSteps = new TreeMap<>();
+    private final Map<Integer, InitDocumentCommand> documentInitCommandSteps = new TreeMap<>();
 
     @Autowired
     public DataLoader(DocumentInitFactory documentInitFactory) {
@@ -37,7 +37,7 @@ public class DataLoader implements ApplicationRunner {
     @Transactional
     public void run(ApplicationArguments args) {
         documentInitCommandSteps.values()
-                .forEach(DocumentInitCommand::execute);
+                .forEach(InitDocumentCommand::execute);
     }
 
 }

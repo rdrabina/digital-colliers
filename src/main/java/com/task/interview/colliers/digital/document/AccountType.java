@@ -13,7 +13,7 @@ import static com.task.interview.colliers.digital.document.constant.Constants.AC
 @Getter
 @Setter
 @NoArgsConstructor
-public class AccountType {
+public class AccountType extends BankDocument {
 
     @Id
     private Long accountType;
@@ -34,6 +34,15 @@ public class AccountType {
         accountType.setName(fields[1]);
 
         return accountType;
+    }
+
+    @Override
+    public Long getId() {
+        return this.accountType;
+    }
+
+    public static AccountType mapFromBankDocument(BankDocument bankDocument) {
+        return (AccountType) bankDocument;
     }
 
 }

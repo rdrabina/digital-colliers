@@ -15,7 +15,7 @@ import static com.task.interview.colliers.digital.document.constant.Constants.CU
 @Getter
 @Setter
 @NoArgsConstructor
-public class Customer {
+public class Customer extends BankDocument {
 
     @Id
     private Long id;
@@ -42,6 +42,10 @@ public class Customer {
         customer.setLastLoginBalance(new BigDecimal(fields[3].replaceAll(",", ".")));
 
         return customer;
+    }
+
+    public static Customer mapFromBankDocument(BankDocument bankDocument) {
+        return (Customer) bankDocument;
     }
 
 }

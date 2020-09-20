@@ -1,6 +1,6 @@
 package com.task.interview.colliers.digital.command.datainit;
 
-public interface DocumentInitCommand {
+public interface InitDocumentCommand {
 
     void execute();
 

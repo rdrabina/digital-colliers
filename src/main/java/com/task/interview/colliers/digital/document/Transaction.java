@@ -19,16 +19,20 @@ import static com.task.interview.colliers.digital.document.constant.Constants.TR
 @Getter
 @Setter
 @NoArgsConstructor
-public class Transaction {
+public class Transaction extends BankDocument {
 
     @Id
     private Long id;
 
     private BigDecimal amount;
 
-    private Long accountType;
+    private Long accountTypeId;
+
+    private AccountType accountType;
 
     private Long customerId;
+
+    private Customer customer;
 
     @DateTimeFormat(pattern = TRANSACTION_DATE_FORMAT)
     private Date transactionDate;
@@ -45,11 +49,30 @@ public class Transaction {
         Transaction transaction = new Transaction();
         transaction.setId(Long.parseLong(fields[0]));
         transaction.setAmount(new BigDecimal(fields[1].replaceAll(",", ".")));
-        transaction.setAccountType(Long.parseLong(fields[2]));
+        Customer customer = new Customer();
+        customer.setFirstName("xD");
+        transaction.setCustomer(customer);
+        transaction.setAccountTypeId(Long.parseLong(fields[2]));
         transaction.setCustomerId(Long.parseLong(fields[3]));
         transaction.setTransactionDate(DateUtils.createDateWithFormat(fields[4], TRANSACTION_DATE_FORMAT));
 
         return transaction;
+    }
+
+    public static Transaction mapFromBankDocument(BankDocument bankDocument) {
+        return (Transaction) bankDocument;
+    }
+
+    public String getAccountTypeName() {
+        return this.accountType.getName();
+    }
+
+    public String getCustomerFirstName() {
+        return this.customer.getFirstName();
+    }
+
+    public String getCustomerLastName() {
+        return this.customer.getLastName();
     }
 
 }

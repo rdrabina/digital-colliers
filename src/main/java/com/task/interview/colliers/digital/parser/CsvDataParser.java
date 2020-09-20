@@ -10,9 +10,10 @@ import java.util.List;
 @Slf4j
 public class CsvDataParser {
 
-    public static List<String[]> readAllDataAtOnce(String file) {
+    public static List<String[]> readDataFromFile(String file) {
         try {
             log.info("Reading data from file: " + file);
+
             return new CSVReaderBuilder(new FileReader(file))
                     .withSkipLines(1)
                     .build()
