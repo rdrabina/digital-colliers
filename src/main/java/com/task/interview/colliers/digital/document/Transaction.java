@@ -21,6 +21,9 @@ import static com.task.interview.colliers.digital.document.constant.Constants.TR
 @NoArgsConstructor
 public class Transaction extends BankDocument {
 
+    private static final String COMMA_SEPARATOR = ",";
+    private static final String DOT_SEPARATOR = ".";
+
     @Id
     private Long id;
 
@@ -48,10 +51,7 @@ public class Transaction extends BankDocument {
     private static Transaction createTransaction(String[] fields) {
         Transaction transaction = new Transaction();
         transaction.setId(Long.parseLong(fields[0]));
-        transaction.setAmount(new BigDecimal(fields[1].replaceAll(",", ".")));
-        Customer customer = new Customer();
-        customer.setFirstName("xD");
-        transaction.setCustomer(customer);
+        transaction.setAmount(new BigDecimal(fields[1].replaceAll(COMMA_SEPARATOR, DOT_SEPARATOR)));
         transaction.setAccountTypeId(Long.parseLong(fields[2]));
         transaction.setCustomerId(Long.parseLong(fields[3]));
         transaction.setTransactionDate(DateUtils.createDateWithFormat(fields[4], TRANSACTION_DATE_FORMAT));
@@ -61,6 +61,14 @@ public class Transaction extends BankDocument {
 
     public static Transaction mapFromBankDocument(BankDocument bankDocument) {
         return (Transaction) bankDocument;
+    }
+
+    public Date getTransactionDate() {
+        return transactionDate;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
     }
 
     public String getAccountTypeName() {

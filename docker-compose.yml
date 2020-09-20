@@ -1,0 +1,22 @@
+version: '3.6'
+services:
+  bank-application:
+    container_name: bank-application
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: bank-application:latest
+    restart: always
+    ports:
+      - "9090:9090"
+    network_mode: "host"
+    logging:
+      driver: json-file
+    environment:
+      PORT: 9090
+      DATABASE_NAME: bank-db
+      DATABASE_USER: digital-user
+      DATABASE_PASSWORD: digital-password
+      DATABASE_CLUSTER: digital-colliers
+      USERNAME_PASSWORD_LIST: admin:admin_password,test:test123
+      LOGGING_LEVEL: info
