@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: bank-application:latest
+    image: rdrabina/bank-application:latest
     restart: always
     ports:
       - "9090:9090"
@@ -19,4 +19,3 @@ services:
       DATABASE_PASSWORD: digital-password
       DATABASE_CLUSTER: digital-colliers
       USERNAME_PASSWORD_LIST: admin:admin_password,test:test123
-      LOGGING_LEVEL: info
